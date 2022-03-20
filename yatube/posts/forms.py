@@ -14,4 +14,4 @@ class PostForm(forms.ModelForm):
         labels = {
             'text': 'Текст нового поста',
             'group': 'Группа, к которой будет относиться пост',
-            }
+        }
