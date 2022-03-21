@@ -7,25 +7,24 @@
 {% block content %}
   <div class='container py-5'>
   <h1>Главная страница</h1>
-  <p>
-    <h4> Десять последних записей пользователей</h4>
-  </p>
+  <h4>Последние записи пользователей</h4>
   {% for post in page_obj %}
     <ul>
       <li>
-        Автор: {{ post.author.get_full_name }}
+        Автор: 
+        <a href="{% url 'posts:profile' post.author.username %}">
+          {{ post.author.get_full_name }}
+        </a>
       </li>
-      <li>
         Дата публикации: {{ post.pub_date|date:"d E Y" }}
       </li>
     </ul>
     <p>{{ post.text|linebreaksbr }}</p>
-      {% if post.group %}   
-        Группа: <a href="{% url 'posts:posts_slug' post.group.slug %}">{{ post.group }}</a>
-      {% endif %}
+    {% if post.group %}   
+      Группа: <a href="{% url 'posts:posts_slug' post.group.slug %}">{{ post.group }}</a>
+    {% endif %}
     {% if not forloop.last %}<hr>{% endif %}
   {% endfor %}
-  </p>
   {% include 'posts/includes/paginator.html' %}
 
 {% endblock %}
