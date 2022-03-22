@@ -33,10 +33,10 @@
     <article class="col-12 col-md-9">
       <p>{{ post.text|linebreaksbr  }}</p>
       <p>
-        {% if request.user == post.author%}
-        <a class="btn btn-primary" href="{% url 'posts:post_edit' post.id %}">
-        редактировать запись
-        </a>
+        {% if request.user == post.author %}
+          <a class="btn btn-primary" href="{% url 'posts:post_edit' post.id %}">
+          редактировать запись
+          </a>
         {% endif %}
       </p>
     </article>

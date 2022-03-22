@@ -29,9 +29,8 @@ def profile(request, username):
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
     return render(request, 'posts/post_detail.html', {
-        'post': post,
+        'post': get_object_or_404(Post, pk=post_id),
     })
 
 
@@ -39,11 +38,9 @@ def post_detail(request, post_id):
 def post_create(request):
     form = PostForm(request.POST or None)
     if not form.is_valid():
-        return render(
-            request,
-            'posts/create_post.html',
-            {'form': form}
-        )
+        return render(request, 'posts/create_post.html',{
+            'form': form
+    })
     post = form.save(commit=False)
     post.author = request.user
     post.save()
